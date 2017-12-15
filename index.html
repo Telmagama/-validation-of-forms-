@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+		<meta charset="utf-8">
+		<title>Validação de Formulários</title>
+   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+   <style type="text/css">
+		body {
+			background: #333;
+			padding-top: 40px;
+		}
+		#container {
+		-webkit-border-radius:10px;
+		-webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+	     -moz-border-radius: 10px;
+	     -moz-border-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+	     -o-border-radius: 10px;
+	    -o-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+	    background: #fff;
+	    border-radius: 10px;
+	    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+	    font-family: sans-serif;
+	    font-size: 18px;
+	    margin:0 auto;
+	    padding: 20px;
+	    width: 190px;
+
+		}
+	.campo {
+		border:outset 6px #6f7eeb;
+		font-size:12px;
+		padding:5px;
+		margin-bottom: 10px;
+		width: 150px;
+
+	}
+	.botton  {
+		background: #ff0098;
+		border:solid 0;
+		padding: 10px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.erros {
+	-webkit-boxshadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	 -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	-o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	   background: red;
+	   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	   color: #fff;
+	   display: none;
+	   margin-top: -50px;
+	   margin-left: 180px;
+	   padding: 10px;
+	   position: absolute;
+	  }
+
+  </style>
+     <script>
+	    // Expressão para validar um email
+	    var expr = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
+	    // Expressão para validar a idade de 18 a 60 anos
+	    var expr2 = /^1[8-9]|[2-9]\d|60$/;
+	    $(document).ready(function(){
+	    	//funcao click
+	    	$("#bEnviar").click(function(){
+	   // Salvar em variáveis ​​o valor das caixas de texto
+	   // Através dos ids
+	  // E ter uma melhor manipulação desses valores
+	    var nome = $("#itnome").val();
+	    var correio = $("#itMail").val();
+	    var assunto	= $("#itAssunto").val();
+	    var idade= $("itIdade").val();
+	    // --- Nested conditional ----
+	                // Se o nome estiver vazio
+	                // Mostra a mensagem
+	                // Com falso deixa o if e espera que o botão de envio seja pressionado novamente
+
+	    if(nome == ""){
+	    	$("#mensagem1").fadeIn("slow");
+	    	return false;
+	    }
+
+	// caso contrário, a mensagem não é exibida
+	    else {
+	    	$("#mensagem1").fadeOut();
+	    	// Se o correio estiver vazio e a expressão NÃO corresponde - teste é função JQuery
+	                    // Mostra a mensagem
+	                    // Com falso deixa o if e espera que o botão de envio seja pressionado novamente
+	    if (correio == "" || !expr.test(correio)) {
+	    	$("#mensagem2").fadeIn("slow");
+	    	return false;	
+	    }
+	    else {
+	    	$("#mensagem2").fadeOut();
+
+	    	if (assunto == "") {
+	    		$("#mensagem3").fadeIn("slow");
+	    		return false;
+	    	}
+	    	else{
+	    		$("#mensagem3").fadeOut();
+
+	    		if (idade == "" || !expr2.test(idade)) {
+	    			$("#mensagem4").fadeIn("slow");
+	    			return false;
+	    		}
+	    	}
+
+	    }
+
+	  }
+
+	      });//click
+	    });//ready
+   </script>
+</head>
+
+  <body>
+	 <div id="container">
+	  	<form id="miFormulario">
+	  	<label>Nome:</label><br>
+	  	<input type="text" id="itNome" class= "campo"><br>
+	  	<div id="mensagem1" class="erros">Digite o seu nome</div><br>
+	    <label>E-mail:</label><br>
+
+	    <input type="text" id="itMail" class="campo"><br/>
+	    <div id="mensagem2" class="erros">Digite e-mail correto</div><br>
+
+	     <label>Assunto:</label><br>
+	     <input type="text" id="itAssunto" class="campo"><br>
+	     <div id="mensagem3" class="erros">adicione um sujeito</div><br/>
+	     <label>Idade</label><br>
+	     <input type="text" id="itIdade" class="campo"><br>
+	     <div id="mensagem4" class="erros">-Idade entre 18 a 60 <br/> - Só números</div><b></b>
+
+	     <center>
+	     	<input type="submit" id="bEnviar" value="Enviar" class="botton">
+	     </center>
+	  	</form>
+	  	
+	  </div>
+  </body>
+
+</html>
